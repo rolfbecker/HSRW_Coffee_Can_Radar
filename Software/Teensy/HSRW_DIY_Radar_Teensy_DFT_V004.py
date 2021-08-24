@@ -1,11 +1,11 @@
 '''
-R. Becker, 2021-08-24
-HSRW DIY Radar: Data Receiver, FFT, and Realtime Plotting
-This program is used to receive data from a teensy via vircual com port at high serial baud rate.
-The data is expected to be arranged in three columns. Each column contains a sampled signal.
+R. Becker, 2021-08-24, CC-BY-SA
+HSRW Coffee Can Radar: Data Receiver, FFT, and Realtime Plotting
+This program is used to receive data from the DAQ (e.g. our Teensy) via virtual com port at high serial baud rate.
 PYQT is used for realtime graphics because it is extremely fast, faster than other solutions I (rb) know.
 The COM port in the code is hard coded.
 '''
+
 from pyqtgraph.Qt import QtGui, QtCore
 import numpy as np
 import pyqtgraph as pg

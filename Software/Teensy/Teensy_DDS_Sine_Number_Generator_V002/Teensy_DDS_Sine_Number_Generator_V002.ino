@@ -1,3 +1,18 @@
+/*
+ * R. Becker, 2021-08-24, CC-BY-SA
+ * Create a signal numerically consisting of the sum of three sines with different frequencies.
+ * A full sine period is stored in array of 1000 values with 2 byte amplitude resolution as signed 16 bit integer. 
+ * The max. possible amplitude range is -32768 (dec) to 32767 (dec) or 1000 0000 0000 0000 (bin) to 1111 1111 1111 1111 (bin). 
+ * A timer is used to "sample" that sine memory. The step size of subsequent samples (e.g. in which step size the reader jumps over the values) 
+ * determines how long it would take to complete a full period, i.e. determines the frequency of the output. 
+ * Example: is the step size were 2 in total 500 read operations (samples) would be needed to complete the cycle. 
+ * If the sample timer is set to 100 KHz it will yield an output frequency of 200 Hz since 200 full cycles could be sampled in one second: 
+ * (100000 samples/sec) / (500 samples/sine_period) = 200 síne_periods/sec .  
+ * In this way three sines are with different frequencies are created and added. This yields a test signal with 3 frequencies to test the spectral analyis with DFT.
+ * To transmit the data fast via USB 1024 2-byte numbers are collected in a buffer. 
+ * If the buffer is half full the first 512 numbers (1024 bytes) are transmitted serially while the sampler fills the second half of the buffer. 
+ * If that is full then the second half of the buffer is transmitted while the sample reader fills the first half of the buffer.
+ */
 
 extern const int16_t sine[1000];
 
@@ -179,4 +194,3 @@ const int16_t sine[1000] =
   -3902,  -3698,  -3493,  -3289,  -3084,  -2879,  -2673,  -2468,  -2263,
   -2057,  -1852,  -1646,  -1441,  -1235,  -1029,   -823,   -618,   -412,
    -206};
-
